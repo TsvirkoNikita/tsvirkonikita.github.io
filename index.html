@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nikita Tsvirko</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #0f172a;
+            color: #f1f5f9;
+        }
+
+        header {
+            padding: 60px 20px;
+            text-align: center;
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 36px;
+        }
+
+        h2 {
+            margin-top: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 40px 20px;
+        }
+
+        .apps {
+            background: #1e293b;
+            padding: 40px 20px;
+        }
+
+        .app-card {
+            background: #0f172a;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+            border: 1px solid #334155;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 18px;
+            background: #3b82f6;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+        }
+
+        .lang-switch {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        button {
+            padding: 6px 12px;
+            margin-left: 5px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            font-size: 14px;
+            color: #94a3b8;
+        }
+    </style>
+</head>
+<body>
+
+<div class="lang-switch">
+    <button onclick="setLang('ru')">RU</button>
+    <button onclick="setLang('en')">EN</button>
+</div>
+
+<header>
+    <h1>Nikita Tsvirko</h1>
+    <p id="subtitle"></p>
+</header>
+
+<section class="container">
+    <h2 id="about-title"></h2>
+    <p id="about-text"></p>
+</section>
+
+<section class="apps">
+    <div class="container">
+        <h2 id="apps-title"></h2>
+
+        <div class="app-card">
+            <h3>Тайна капитана Шелтона</h3>
+            <p id="app-description"></p>
+            <a class="btn" href="https://play.google.com/store/apps/details?id=com.puman.themysteryofcaptainshelton" target="_blank">Google Play</a>
+        </div>
+    </div>
+</section>
+
+<footer>
+    © 2026 Nikita Tsvirko
+</footer>
+
+<script>
+const translations = {
+    ru: {
+        subtitle: "Senior .NET Engineer | Team Manager",
+        aboutTitle: "Обо мне",
+        aboutText: `
+Я занимаюсь разработкой более 8 лет. 
+Основная специализация — C#, .NET, ASP.NET, MAUI.
+
+В свободное время занимаюсь разработкой собственных проектов.
+        `,
+        appsTitle: "Мои приложения",
+        appDescription: "Мобильная адаптация книги-игры Дмитрия Браславского."
+    },
+    en: {
+        subtitle: "Senior .NET Engineer | Team Manager",
+        aboutTitle: "About Me",
+        aboutText: `
+I have over 8 years of professional experience in development.
+My core stack includes C#, .NET, ASP.NET, MAUI.
+
+In my free time, I build my own projects.
+        `,
+        appsTitle: "My Apps",
+        appDescription: "A mobile adaptation of Dmitry Braslavsky's gamebook."
+    }
+};
+
+function setLang(lang) {
+    document.getElementById("subtitle").innerText = translations[lang].subtitle;
+    document.getElementById("about-title").innerText = translations[lang].aboutTitle;
+    document.getElementById("about-text").innerText = translations[lang].aboutText;
+    document.getElementById("apps-title").innerText = translations[lang].appsTitle;
+    document.getElementById("app-description").innerText = translations[lang].appDescription;
+}
+
+setLang('ru');
+</script>
+
+</body>
+</html>
