@@ -1,2 +1,2 @@
-# tsvirkonikita.github.io
-Personal website
+# My personal website
+https://tsvirkonikita.github.io
