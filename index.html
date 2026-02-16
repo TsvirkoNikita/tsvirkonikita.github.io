@@ -1,154 +1,320 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="favicon.png" />
     <title>Nikita Tsvirko</title>
+
     <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #0f172a;
-            color: #f1f5f9;
-        }
+      :root {
+        --bg: #f8fafc;
+        --text: #0f172a;
+        --card: #ffffff;
+        --accent: #2563eb;
+        --border: #e2e8f0;
+      }
 
-        header {
-            padding: 60px 20px;
-            text-align: center;
-            background: linear-gradient(135deg, #1e293b, #0f172a);
-        }
+      [data-theme="dark"] {
+        --bg: #1f1f1f;
+        --text: #e8eaed;
+        --card: #2a2a2a;
+        --accent: #8ab4f8;
+        --border: #3c4043;
+      }
 
-        h1 {
-            margin: 0;
-            font-size: 36px;
-        }
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        transition: 0.3s;
+      }
 
-        h2 {
-            margin-top: 0;
-        }
+      header {
+        padding: 60px 20px;
+        text-align: center;
+      }
 
-        .container {
-            max-width: 900px;
-            margin: auto;
-            padding: 40px 20px;
-        }
+      .container {
+        max-width: 900px;
+        margin: auto;
+        padding: 40px 20px;
+      }
 
-        .apps {
-            background: #1e293b;
-            padding: 40px 20px;
-        }
+      .app-card {
+        display: flex;
+        gap: 20px;
+        background: var(--card);
+        padding: 22px;
+        border-radius: 16px;
+        border: 1px solid var(--border);
+        align-items: center;
+      }
 
+      .app-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+      }
+
+      .app-icon {
+        width: 80px;
+        height: 80px;
+        border-radius: 18px;
+      }
+
+      .btn {
+        margin-top: 10px;
+        display: inline-block;
+        padding: 10px 18px;
+        background: var(--accent);
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+      }
+
+      .about-actions {
+        margin-top: 28px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+      }
+
+      .contact-pill {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 18px;
+        border-radius: 999px;
+        background: var(--card);
+        border: 1px solid var(--border);
+        color: var(--text);
+        text-decoration: none;
+        font-weight: 600;
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease,
+          background 0.2s ease;
+      }
+
+      .contact-pill svg {
+        width: 20px;
+        height: 20px;
+        fill: var(--text);
+      }
+
+      .contact-pill:hover {
+        transform: translateY(-2px);
+        background: var(--accent);
+        color: white;
+        box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+      }
+
+      .contact-pill:hover svg {
+        fill: white;
+      }
+
+      .controls {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+      }
+
+      button {
+        padding: 6px 12px;
+        border-radius: 6px;
+        border: none;
+        cursor: pointer;
+      }
+
+      footer {
+        text-align: center;
+        padding: 30px;
+        opacity: 0.7;
+      }
+
+      footer a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+
+      @media (max-width: 600px) {
+        .about-actions {
+          justify-content: center;
+        }
         .app-card {
-            background: #0f172a;
-            padding: 20px;
-            border-radius: 12px;
-            margin-top: 20px;
-            border: 1px solid #334155;
+          flex-direction: column;
+          text-align: center;
         }
-
-        .btn {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 10px 18px;
-            background: #3b82f6;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-        }
-
-        .lang-switch {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-        }
-
-        button {
-            padding: 6px 12px;
-            margin-left: 5px;
-            border-radius: 6px;
-            border: none;
-            cursor: pointer;
-        }
-
-        footer {
-            text-align: center;
-            padding: 30px;
-            font-size: 14px;
-            color: #94a3b8;
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
 
-<div class="lang-switch">
-    <button onclick="setLang('ru')">RU</button>
-    <button onclick="setLang('en')">EN</button>
-</div>
-
-<header>
-    <h1>Nikita Tsvirko</h1>
-    <p id="subtitle"></p>
-</header>
-
-<section class="container">
-    <h2 id="about-title"></h2>
-    <p id="about-text"></p>
-</section>
-
-<section class="apps">
-    <div class="container">
-        <h2 id="apps-title"></h2>
-
-        <div class="app-card">
-            <h3>Тайна капитана Шелтона</h3>
-            <p id="app-description"></p>
-            <a class="btn" href="https://play.google.com/store/apps/details?id=com.puman.themysteryofcaptainshelton" target="_blank">Google Play</a>
-        </div>
+  <body>
+    <div class="controls">
+      <button onclick="setLang('ru')">RU</button>
+      <button onclick="setLang('en')">EN</button>
+      <button onclick="toggleTheme()">🌓</button>
     </div>
-</section>
 
-<footer>
-    © 2026 Nikita Tsvirko
-</footer>
+    <header>
+      <h1>Nikita Tsvirko</h1>
+      <p id="subtitle"></p>
+    </header>
 
-<script>
-const translations = {
-    ru: {
-        subtitle: "Senior .NET Engineer | Team Manager",
-        aboutTitle: "Обо мне",
-        aboutText: `
-Я занимаюсь разработкой более 8 лет. 
-Основная специализация — C#, .NET, ASP.NET, MAUI.
+    <section class="container">
+      <h2 id="about-title"></h2>
+      <p id="about-text"></p>
 
-В свободное время занимаюсь разработкой собственных проектов.
-        `,
-        appsTitle: "Мои приложения",
-        appDescription: "Мобильная адаптация книги-игры Дмитрия Браславского."
-    },
-    en: {
-        subtitle: "Senior .NET Engineer | Team Manager",
-        aboutTitle: "About Me",
-        aboutText: `
-I have over 8 years of professional experience in development.
-My core stack includes C#, .NET, ASP.NET, MAUI.
+      <div class="about-actions">
+        <a
+          class="contact-pill"
+          href="https://www.linkedin.com/in/nikita-tsvirko/"
+          target="_blank"
+        >
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M4.98 3.5C4.98 4.88 3.88 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM0 8h5v16H0zM8 8h4.8v2.2h.1c.67-1.2 2.3-2.47 4.73-2.47C21.4 7.73 24 10 24 14.3V24h-5v-8.5c0-2-.04-4.6-2.8-4.6-2.8 0-3.2 2.18-3.2 4.44V24H8z"
+            />
+          </svg>
+          LinkedIn
+        </a>
 
-In my free time, I build my own projects.
-        `,
-        appsTitle: "My Apps",
-        appDescription: "A mobile adaptation of Dmitry Braslavsky's gamebook."
-    }
-};
+        <a class="contact-pill" href="https://t.me/roxler" target="_blank">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M9.04 15.47l-.38 5.38c.54 0 .78-.23 1.07-.5l2.57-2.45 5.32 3.89c.98.54 1.67.26 1.93-.9L23.9 3.9c.32-1.47-.53-2.05-1.48-1.7L1.5 10.3c-1.43.56-1.41 1.36-.26 1.71l5.38 1.68L18.9 6.1c.58-.38 1.1-.17.67.21z"
+            />
+          </svg>
+          Telegram
+        </a>
 
-function setLang(lang) {
-    document.getElementById("subtitle").innerText = translations[lang].subtitle;
-    document.getElementById("about-title").innerText = translations[lang].aboutTitle;
-    document.getElementById("about-text").innerText = translations[lang].aboutText;
-    document.getElementById("apps-title").innerText = translations[lang].appsTitle;
-    document.getElementById("app-description").innerText = translations[lang].appDescription;
-}
+        <a class="contact-pill" href="mailto:tsvirko.nikita@gmail.com">
+          <svg
+            fill="#000000"
+            version="1.1"
+            id="Capa_1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            viewBox="0 0 469.2 469.2"
+            xml:space="preserve"
+          >
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g
+              id="SVGRepo_tracerCarrier"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></g>
+            <g id="SVGRepo_iconCarrier">
+              <g>
+                <path
+                  d="M22.202,77.023C25.888,75.657,29.832,74.8,34,74.8h401.2c4.168,0,8.112,0.857,11.798,2.224L267.24,246.364 c-18.299,17.251-46.975,17.251-65.28,0L22.202,77.023z M464.188,377.944c3.114-5.135,5.012-11.098,5.012-17.544V108.8 c0-4.569-0.932-8.915-2.57-12.899L298.411,254.367L464.188,377.944z M283.2,268.464c-13.961,11.961-31.253,18.027-48.6,18.027 c-17.347,0-34.64-6.06-48.6-18.027L20.692,391.687c4.094,1.741,8.582,2.714,13.308,2.714h401.2c4.726,0,9.214-0.973,13.308-2.714 L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12.409,5.012,17.544l165.777-123.577L2.571,95.9z"
+                ></path>
+              </g>
+            </g>
+          </svg>
+          Email
+        </a>
+      </div>
+    </section>
 
-setLang('ru');
-</script>
+    <section class="container">
+      <h2 id="apps-title"></h2>
+      <div id="apps-list"></div>
+    </section>
 
-</body>
+    <footer>
+      © 2026 Nikita Tsvirko ·
+      <a href="privacy.html" target="_blank">Privacy & Terms</a>
+    </footer>
+
+    <script>
+      const translations = {
+        ru: {
+          subtitle: "Senior .NET Engineer | Team Manager",
+          aboutTitle: "Обо мне",
+          aboutText: `
+      Я занимаюсь разработкой более 8 лет.
+      Основная специализация — C#, .NET, ASP.NET, MAUI.
+
+      В свободное время занимаюсь разработкой собственных проектов.
+              `,
+          appsTitle: "Мои приложения",
+        },
+        en: {
+          subtitle: "Senior .NET Engineer | Team Manager",
+          aboutTitle: "About Me",
+          aboutText: `
+      I have over 8 years of professional experience in development.
+      My core stack includes C#, .NET, ASP.NET, MAUI.
+
+      In my free time, I build my own projects.
+              `,
+          appsTitle: "My Apps",
+        },
+      };
+
+      const apps = [
+        {
+          title: {
+            ru: "Тайна капитана Шелтона",
+            en: "The Mystery of Captain Shelton",
+          },
+          description: {
+            ru: "Мобильная адаптация книги-игры Дмитрия Браславского.",
+            en: "A mobile adaptation of Dmitry Braslavsky's gamebook.",
+          },
+          icon: "img/shelton.png",
+          link: "https://play.google.com/store/apps/details?id=com.puman.themysteryofcaptainshelton",
+        },
+      ];
+
+      function renderApps(lang) {
+        const list = document.getElementById("apps-list");
+        list.innerHTML = "";
+        apps.forEach((app) => {
+          list.innerHTML += `
+      <div class="app-card">
+      <img class="app-icon" src="${app.icon}">
+      <div>
+      <h3>${app.title[lang]}</h3>
+      <p>${app.description[lang]}</p>
+      <a class="btn" href="${app.link}" target="_blank">Google Play</a>
+      </div>
+      </div>`;
+        });
+      }
+
+      function setLang(lang) {
+        localStorage.setItem("lang", lang);
+        document.getElementById("subtitle").innerText =
+          translations[lang].subtitle;
+        document.getElementById("about-title").innerText =
+          translations[lang].aboutTitle;
+        document.getElementById("about-text").innerText =
+          translations[lang].aboutText;
+        document.getElementById("apps-title").innerText =
+          translations[lang].appsTitle;
+        renderApps(lang);
+      }
+
+      function toggleTheme() {
+        const t = document.body.dataset.theme === "dark" ? "light" : "dark";
+        document.body.dataset.theme = t;
+        localStorage.setItem("theme", t);
+      }
+
+      function init() {
+        document.body.dataset.theme =
+          localStorage.getItem("theme") ||
+          (window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light");
+
+        setLang(localStorage.getItem("lang") || "ru");
+      }
+
+      init();
+    </script>
+  </body>
 </html>
