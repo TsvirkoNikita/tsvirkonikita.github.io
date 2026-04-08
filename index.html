@@ -74,6 +74,48 @@
         border-radius: 8px;
       }
 
+      .store-buttons {
+        display: flex;
+        gap: 12px;
+        margin-top: 12px;
+        flex-wrap: wrap;
+      }
+
+      .store-btn {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 16px;
+        border-radius: 10px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 14px;
+        color: white;
+        transition: all 0.25s ease;
+      }
+
+      .store-btn svg {
+        width: 20px;
+        height: 20px;
+      }
+
+      .store-btn:hover {
+        transform: translateY(-3px) scale(1.03);
+        box-shadow: 0 10px 22px rgba(0, 0, 0, 0.25);
+      }
+
+      .google-play {
+        background: linear-gradient(135deg, #34a853, #0f9d58);
+      }
+
+      .app-store {
+        background: linear-gradient(135deg, #0f172a, #000000);
+      }
+
+      [data-theme="dark"] .app-store {
+        background: linear-gradient(135deg, #1f2937, #000000);
+      }
+
       .about-actions {
         margin-top: 28px;
         display: flex;
@@ -266,7 +308,10 @@
             en: "A mobile adaptation of Dmitry Braslavsky's gamebook.",
           },
           icon: "img/shelton.png",
-          link: "https://play.google.com/store/apps/details?id=com.puman.themysteryofcaptainshelton",
+          googlePlayLink:
+            "https://play.google.com/store/apps/details?id=com.puman.themysteryofcaptainshelton",
+          appStoreLink:
+            "https://apps.apple.com/us/app/тайна-капитана-шелтона/id6759469103",
         },
       ];
 
@@ -275,14 +320,32 @@
         list.innerHTML = "";
         apps.forEach((app) => {
           list.innerHTML += `
-      <div class="app-card">
-      <img class="app-icon" src="${app.icon}">
-      <div>
-      <h3>${app.title[lang]}</h3>
-      <p>${app.description[lang]}</p>
-      <a class="btn" href="${app.link}" target="_blank">Google Play</a>
-      </div>
-      </div>`;
+<div class="app-card">
+<img class="app-icon" src="${app.icon}">
+<div>
+<h3>${app.title[lang]}</h3>
+<p>${app.description[lang]}</p>
+
+<div class="store-buttons">
+
+<a class="store-btn google-play" href="${app.googlePlayLink}" target="_blank">
+<svg viewBox="0 0 24 24" fill="white">
+<path d="M3 2l13 10L3 22V2zm14 11l3-2-3-2v4z"/>
+</svg>
+Google Play
+</a>
+
+<a class="store-btn app-store" href="${app.appStoreLink}" target="_blank">
+<svg viewBox="0 0 24 24" fill="white">
+<path d="M16.365 1.43c0 1.14-.465 2.21-1.242 3.02-.83.86-2.19 1.52-3.41 1.42-.15-1.12.43-2.3 1.19-3.1.83-.88 2.28-1.52 3.46-1.34zM20.5 17.3c-.38.86-.83 1.65-1.35 2.36-.71.97-1.3 1.63-1.77 2-.73.61-1.5.92-2.32.94-.59 0-1.3-.17-2.12-.52-.83-.35-1.6-.52-2.31-.52-.75 0-1.55.17-2.39.52-.85.35-1.53.54-2.04.56-.8.03-1.59-.3-2.35-.97-.49-.42-1.1-1.11-1.82-2.08-.78-1.03-1.42-2.23-1.92-3.6-.53-1.48-.8-2.92-.8-4.32 0-1.6.34-2.98 1.03-4.15.54-.93 1.26-1.66 2.15-2.2.9-.54 1.86-.82 2.9-.84.64 0 1.47.2 2.5.59 1.02.4 1.67.59 1.96.59.21 0 .91-.22 2.08-.66 1.11-.41 2.04-.58 2.78-.51 2.01.16 3.52.95 4.52 2.38-1.8 1.09-2.69 2.63-2.67 4.63.02 1.56.58 2.85 1.69 3.87.5.47 1.05.83 1.66 1.08-.14.41-.29.8-.45 1.17z"/>
+</svg>
+App Store
+</a>
+
+</div>
+
+</div>
+</div>`;
         });
       }
 
